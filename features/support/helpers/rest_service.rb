@@ -28,7 +28,10 @@ module Rest_service
         request = Net::HTTP::Get.new(url)
     end
 
-    request.basic_auth($app_user,$app_password)
+      # if is_auth
+      #   request.basic_auth($app_user,$app_password)   
+      # end
+     
    return request
   end
 
