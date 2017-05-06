@@ -2,6 +2,7 @@
 require 'pathname'
 require 'yaml'
 require 'json_spec/cucumber'
+require 'jsonpath'
 
 
 def find_config_file(filename)

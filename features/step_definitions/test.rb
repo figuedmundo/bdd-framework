@@ -9,17 +9,17 @@ When /^I send a (PUT|POST) request to (.*?) with json$/ do |method, end_point, j
   # http_request.basic_auth($app_user,$app_password)
   http_request['content-type'] = 'application/json'
   http_request['accept'] = 'application/json'
-  
+
   http_request.body = json_text
-  
+
   puts "Maria mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm auth"
   puts @basic_auth
   if @basic_auth
     puts "Maria pero~~~~~!@!!!!!!"
     http_request.basic_auth($app_user,$app_password)
     puts http_request['Authorization']
-  end  
-  
+  end
+
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
   puts @last_json
@@ -29,8 +29,8 @@ end
 
 When /^I send a (GET) request to "(.*?)"$/ do |method, end_point|
   http_request = Rest_service.get_request(method, end_point)
-  # http_request['Authorization'] = Auth_app.make_base_auth
-  puts http_request['Authorization']
+
+  if @basic_auth then http_request.basic_auth($app_user,$app_password) end
 
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
@@ -56,4 +56,14 @@ end
 
 Then /^I expect JSON equal to$/ do |json_text|
   expect(@last_json).to be_json_eql json_text
+end
+
+Then /^I expect JSON response should (not)?\s?have "([^"]*)" with the text "([^"]*)"$/ do |negative, json_path, text|
+  json=JSON.parse(@last_json)
+  results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
+  if negative == 'not'
+    expect(results).not_to include(text)
+  else
+    expect(results).to include(text)
+  end
 end

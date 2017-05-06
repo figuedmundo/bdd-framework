@@ -5,3 +5,4 @@ source "https://rubygems.org"
 gem 'cucumber'
 gem 'rspec'
 gem 'json_spec'
+gem 'jsonpath'
