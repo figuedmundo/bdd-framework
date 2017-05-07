@@ -1,8 +1,6 @@
 app:
-  # user: alejan_dra01@outlook.com
-  # password: elian123
-  user: mame@mame.com
-  password: mame
+  user: todo.ly.user@gmail.com
+  password: pASswoRd
   host: todo.ly
   rootPath: /api
   # port: 80
