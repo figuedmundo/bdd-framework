@@ -2,6 +2,7 @@
 Feature: Test API POST Items
 
 @crud
+# todo: Sample
 Scenario: Create a new item in the inbox
 Given I have set a connection to application
   And I have basic authentication

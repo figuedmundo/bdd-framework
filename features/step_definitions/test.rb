@@ -1,7 +1,8 @@
 Given(/^I have set a connection to application$/) do
   # pending # Write code here that turns the phrase above into concrete actions
   @http_connection = Rest_service.get_connection
-
+  @storeProperties = {}
+  @storeProperties.default='0'
 end
 
 When /^I send a (PUT|POST) request to (.*?) with json$/ do |method, end_point, json_text|
