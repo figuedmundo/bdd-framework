@@ -51,3 +51,9 @@ Then /^I expect JSON response should start "(.*)" with a stored property "(.*)"$
   results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
   expect(results[0]).to start_with(@storeProperties[nameProperty])
 end
+
+Then /^I expect JSON response should be different "(.*)" with a stored property "(.*)"$/  do |json_path, nameProperty|
+  json=JSON.parse(@last_json)
+  results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
+  expect(results).not_to include(@storeProperties[nameProperty])
+end
