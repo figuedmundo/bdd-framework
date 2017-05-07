@@ -16,7 +16,7 @@ Then I expect HTTP code 200
 Scenario: Delete an existing item by Id of a Project
 Given I have set a connection to application
   And I have basic authentication
-  And I have a created Project wth Content "Project With Item"
+  And I have a created Project with Content "Project With Item"
   And I want to store a property "$.Id" in "ProjectId"
   And I have a created Item with Content "Item to Delete" in the Project with Id "ProjectId"
   And I want to store a property "$.Id" in "ItemId"
