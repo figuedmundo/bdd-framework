@@ -18,6 +18,7 @@ After('@teardownDeleteItems') do
 	http_request = Rest_service.get_request("DELETE", "/Filters/-4/Items.json")
 	http_request.basic_auth($app_user,$app_password)
 	@http_response = Rest_service.execute_request(@http_connection, http_request)
+	log("Teardown: @teardownDeleteItems...")
 end
 
 #Author: Alejandra Arteaga
@@ -27,5 +28,13 @@ After('@teardownDeleteUser') do
   http_request.basic_auth($newEmail, $newPass) 
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
+  log("Teardown: @teardownDeleteUser...")
 end
 
+Before do |scenario|
+	log("START SCENARIO: \"#{scenario.name}\"")
+end
+
+After do |scenario|
+	log("FINISHED SCENARIO: \"#{scenario.name}\"")
+end

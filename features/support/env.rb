@@ -36,4 +36,12 @@ AfterConfiguration do |config|
   $app_host = configuration['app']['host']
   # $app_port = configuration['app']['port']
   $app_root = configuration['app']['rootPath']
+  file = File.open('execution.log', 'a+')
+  file.truncate (0)
+end
+
+def log message
+    file = File.open('execution.log', 'a+')
+    file.write("\n#{Time.now.strftime("%m/%d/%Y %H:%M:%S")}: #{message}")
+    file.close
 end
