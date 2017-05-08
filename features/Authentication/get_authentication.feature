@@ -1,5 +1,5 @@
 # author Alejandra Arteaga
-@api_test
+@api_test @authentication
 Feature: Test API GET authentication
 
 @smoke 

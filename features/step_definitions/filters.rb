@@ -11,7 +11,6 @@ end
 
 
 Then(/^JSON response should have "([^"]*)" with a stored property "([^"]*)"$/) do |json_path, nameProperty|
-  puts @last_json
   json=JSON.parse(@last_json)
   results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
   expect(results).to include(nameProperty)

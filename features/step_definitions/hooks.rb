@@ -27,7 +27,5 @@ After('@teardownDeleteUser') do
   http_request.basic_auth($newEmail, $newPass) 
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
-  puts "#{$newEmail}"
-  puts "#{$newPass}"
 end
 

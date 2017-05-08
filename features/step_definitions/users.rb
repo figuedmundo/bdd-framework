@@ -12,7 +12,6 @@ Given /^I have a created User with Email "(.*?)"$/ do |email|
         }"
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
-  puts @last_json
 end
 
 When /^I send a (DELETE) User request to "(.*)"$/ do |method,end_point|

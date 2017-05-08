@@ -28,5 +28,4 @@ When /^I send a (PUT) request to "(.*)" with Id "(.*)" and json$/ do |method, en
 
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
-  puts @last_json
 end
