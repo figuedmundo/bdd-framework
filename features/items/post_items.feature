@@ -3,7 +3,7 @@
 Feature: Test API POST Items
 
 #Miguel's scenarios
-@crud
+@crud @teardownDeleteItems
 Scenario: Create Items with the same Content in the inbox
   Given I have set a connection to application
     And I have basic authentication
@@ -27,13 +27,13 @@ Scenario: Create a new item in the inbox
  Given I have set a connection to application
    And I have basic authentication
    And I send a POST request to /items.json with json
-  """
+   """
       {
         "Content":"new Item on Inbox","ProjectId":"0","DueDate":""
       }
     """
    And I want to store a property "$.Id" in "item_id"
-  When I send a GET filter request to "/filters/[id]/doneitems.json" with id "0" # 0 is the static id for Inbox
+  When I send a GET filter request to "/filters/[id]/items.json" with id "0"
   Then I expect HTTP code 200
    And I expect JSON response should have "$[0].Id" with a stored property "item_id"
    And I expect JSON response should have "$[0].Content" with the text "new Item on Inbox"

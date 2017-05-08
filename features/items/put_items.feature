@@ -1,4 +1,5 @@
 #Authors: Maria Alcocer and Miguel Pari
+@items
 Feature: Puts items
 
 #Maria's scenarios

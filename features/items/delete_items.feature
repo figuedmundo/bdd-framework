@@ -1,3 +1,4 @@
+#Author: Miguel Pari
 @api_test @items
 Feature: Test API DELETE Items
 
