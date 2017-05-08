@@ -19,3 +19,14 @@ Then(/^JSON response should have "([^"]*)" with a stored property "([^"]*)"$/) d
   results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
   expect(results).to include(nameProperty)
 end
+
+
+Then(/^I expect JSON response should not have "([^"]*)" with a stored property "([^"]*)"$/) do |arg1, arg2|
+  puts @last_json
+  json=JSON.parse(@last_json)
+  results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
+  expect(results).not_to include(nameProperty)
+end
+
+
+

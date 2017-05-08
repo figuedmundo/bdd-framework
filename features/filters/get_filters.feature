@@ -41,7 +41,7 @@ Examples:
  |-5		|Next		|20  |4		   |
 
 
- @crud
+ @crud @teardownDeleteItems
  Scenario: Get the list of Items within the given filter
  Given I have set a connection to application
  And I have basic authentication
@@ -57,45 +57,45 @@ Examples:
   And I expect JSON response should have "$[0].Id" with a stored property "item_id"
  And I expect JSON response should have "$[0].Content" with the text "new Item to Next filter"
 
- @crud
+ @crud @teardownDeleteItems
  Scenario: Get the list of done Items within the given filter
  Given I have set a connection to application
  And I have basic authentication
  And I send a POST request to /items.json with json
  	"""
       {
-        "Content":"new Item to done","ProjectId":"-5","DueDate":""
+        "Content":"new Item to done","ProjectId":"-1","DueDate":""
       }
     """
  And I want to store a property "$.Id" in "item_id"
-And I send a PUT request to "/items/[id].json" with Id "item_id" and json
+And I send a PUT request to "/Items/[id].json" with Id "item_id" and json
       """
       {
         "Checked":true
       }
       """
-When I send a GET filter request to "/filters/[id]/doneitems.json" with id "-5"
+When I send a GET filter request to "/filters/[id]/doneitems.json" with id "-1"
 Then I expect HTTP code 200
 And I expect JSON response should have "$[0].Id" with a stored property "item_id"
 And I expect JSON response should have "$[0].Content" with the text "new Item to done"
 And I expect JSON response should have "$[0].Checked" with the text "true"
 
-@negative @teardownDeleteItems
- Scenario: Get the list of done Items (item not done) within the given filter
-Given I have set a connection to application
- And I have basic authentication
- And I send a POST request to /items.json with json
- 	"""
-      {
-        "Content":"new Item not done","ProjectId":"-5","DueDate":""
-      }
-    """
- And I want to store a property "$.Id" in "item_id"
-When I send a GET filter request to "/filters/[id]/doneitems.json" with id "-5"
-Then I expect HTTP code 200
- And I expect JSON response should not have "$[0].Id" with a stored property "item_id"
- And I expect JSON response should not have "$[0].Content" with the text "new Item not done"
- And I expect JSON response should not have "$[0].Checked" with the text "true"
+# @negative @teardownDeleteItems
+#  Scenario: Get the list of done Items (item not done) within the given filter
+# Given I have set a connection to application
+#  And I have basic authentication
+#  And I send a POST request to /items.json with json
+#  	"""
+#       {
+#         "Content":"new Item not done","ProjectId":"-5","DueDate":""
+#       }
+#     """
+#  And I want to store a property "$.Id" in "item_id"
+# When I send a GET filter request to "/filters/[id]/doneitems.json" with id "-5"
+# Then I expect HTTP code 200
+#  And I expect JSON response should not have "$[0].Id" with a stored property "item_id"
+#  And I expect JSON response should not have "$[0].Content" with the text "new Item not done"
+#  And I expect JSON response should not have "$[0].Checked" with the text "true"
 
 
 

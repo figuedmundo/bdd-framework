@@ -2,7 +2,7 @@
 Feature: Puts items
 
 #Maria's scenarios
-@crud
+@crud @teardownDeleteItems
 Scenario: Update an Item by Id
 Given I have set a connection to application
   And I have basic authentication

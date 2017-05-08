@@ -22,7 +22,7 @@ Scenario: Create Items with the same Content in the inbox
 
 
 #Maria's scenarios
-@crud
+@crud @teardownDeleteItems
 Scenario: Create a new item in the inbox
  Given I have set a connection to application
    And I have basic authentication
