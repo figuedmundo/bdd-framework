@@ -1,3 +1,4 @@
+# author Alejandra Arteaga
 @api_test
 Feature: Test API GET authentication
 
@@ -7,6 +8,7 @@ Scenario:
   When I send a GET request to "/authentication/isauthenticated.json"
   Then I expect HTTP code 200
 
+# author Edmundo Figueroa
 @smoke 
 Scenario: Get 200 code response when get authentication token 
   Given I have set a connection to application

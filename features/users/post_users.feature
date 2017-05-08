@@ -1,39 +1,24 @@
-@api_test
+# author Alejandra Arteaga
+@api_test @users
 Feature: Test API POST user
 
-@crud @test
+@crud
 Scenario: Create user wit valid information
 Given I have set a connection to application
 When I send a POST request to /user.json with json
       """
         {
-          "Email": "todo_ly_to_be_deleted@email.com",
-          "FullName": "user test to be deleted",
+          "Email": "todo_ly_to_be_created@email.com",
+          "FullName": "user test to be created",
           "Password": "pASswoRd"
         }
       """
 Then I expect HTTP code 200
-And I expect JSON equal to
-      """
-          {
-          "Id": 588389,
-          "Email": "todo_ly_to_be_deleted@email.com",
-          "Password": null,
-          "FullName": "user test to be deleted",
-          "TimeZone": 0,
-          "IsProUser": false,
-          "DefaultProjectId": 3647078,
-          "AddItemMoreExpanded": false,
-          "EditDueDateMoreExpanded": false,
-          "ListSortType": 0,
-          "FirstDayOfWeek": 0,
-          "NewTaskDueDate": -1,
-          "TimeZoneId": "Pacific Standard Time"
-        }
-      """
-When I delete user created
+  And I expect JSON response should have "$.Email" with the text "todo_ly_to_be_created@email.com"
+  And I expect JSON response should have "$.FullName" with the text "user test to be created"
+Then I delete a created User with Email "todo_ly_to_be_created@email.com" and Password "pASswoRd"
 
-@negative
+@negative 
 Scenario: Create user wit invalid information
 Given I have set a connection to application
 When I send a POST request to /user.json with json

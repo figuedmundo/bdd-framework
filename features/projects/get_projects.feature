@@ -2,6 +2,12 @@
 @api_test @projects
 Feature: Test API GET Projects
 
+  @smoke
+  Scenario: Make sure that projects endpoint is alive
+    Given I have set a connection to application
+    When I send a GET request to "/projects.json"
+    Then I expect HTTP code 200
+
   @crud
   Scenario: Get List of projects in response body with status 200
     Given I have set a connection to application
@@ -21,7 +27,7 @@ Feature: Test API GET Projects
     And I expect JSON response should have "$.Id" with a stored property "ProjectId"
     And I expect JSON response should have "$.Content" with the text "Project_Custom"
 
-  @crud 
+  @crud
   Scenario: Get a list of items that belongs to a project
     Given I have set a connection to application
     And I have basic authentication
