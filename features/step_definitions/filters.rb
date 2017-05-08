@@ -1,3 +1,4 @@
+#Author: MAria Eloisa Alcocer Villarroel
 
 When(/^I send a (GET|DELETE) filter request to "([^"]*)" with id "([^"]*)"$/) do |method, end_point, filter_id|
 	puts "FILTER_ID #{filter_id}"
@@ -9,4 +10,12 @@ When(/^I send a (GET|DELETE) filter request to "([^"]*)" with id "([^"]*)"$/) do
   @http_response = Rest_service.execute_request(@http_connection, http_request)
   @last_json = @http_response.body
   puts @http_response.body
+end
+
+
+Then(/^JSON response should have "([^"]*)" with a stored property "([^"]*)"$/) do |json_path, nameProperty|
+  puts @last_json
+  json=JSON.parse(@last_json)
+  results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
+  expect(results).to include(nameProperty)
 end
